@@ -2,15 +2,15 @@ from flask import Flask, request, render_template, redirect
 from forms import RatingRequest
 import numpy as np
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'dev'
+application = Flask(__name__)
+application.config['SECRET_KEY'] = 'dev'
 
 try:
 	customerid
 except NameError:
 	customerid = 1
 
-@app.route('/', methods=['POST', 'GET'])
+@application.route('/', methods=['POST', 'GET'])
 def getinfo():
 
 	global customerid
@@ -96,12 +96,12 @@ def findrate(data):
 	rate = round(quoterate(data) - discountrate(data), 2)
 	return rate
 
-@app.route('/premium', methods=['GET'])
+@application.route('/premium', methods=['GET'])
 def showrate():
 	if request.method == 'GET':
 		return render_template('premium.html')
 
-@app.route('/reset', methods=['GET'])
+@application.route('/reset', methods=['GET'])
 def resetform():
 	global customerid
 	form = RatingRequest()
