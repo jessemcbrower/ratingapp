@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{% block content %}
+
+<h1>Calculate Your Rate</h1>
+<h3>Please enter your information accurately:</h3>
+<form action='/' method='POST'>
+{{ form.hidden_tag() }}
+	<p><b>Customer ID: </b>{{ customerid }}</p>
+	<p><b>Dwelling Coverage: </b>{{ form.DwellingCoverage(Placeholder="Coverage Amount") }}</p>
+	<p><b>Age of Home: </b>{{ form.HomeAge(Placeholder="Years") }}</p>
+	<p><b>Roof Type: </b>{{ form.RoofType }}</p>
+	<p><b>Number of Units: </b>{{ form.NumberOfUnits }}</p>
+	<p><b>Partner Discount? </b>{{ form.PartnerDiscount }}</p>
+	<input type="submit" value="Calculate">
+</form>
+{% endblock %}
+</body>
+</html>

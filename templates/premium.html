@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{% block content %}
+
+<h1>Your Estimated Total Premium Is: ${{ rate }}</h1>
+<h3>Details of your rate:</h3>
+<ul>
+	<li><b>Customer ID: </b>{{ customerid }}</li>
+	<li><b>Dwelling Coverage Rate: </b>{{ dwelling }}</li>
+	<li><b>Home Age Rate: </b>{{ age }}</li>
+	<li><b>Roof Type Rate: </b>{{ roof }}</li>
+	<li><b>Number of Units Rate: </b>{{ units }}</li>
+	<li><b>Discount: </b>${{ discount }}</li>
+</ul>
+<form action="/reset" method="GET">
+{{ form.hidden_tag() }}
+	<input type="submit" value="Reset">
+</form>
+{% endblock %}
+</body>
+</html>
