@@ -29,80 +29,69 @@ def getinfo():
 
 		}
 
-		dwelling = round(dwellingrate(data), 3)
-		age = homeage(data)
-		units = unitsrate(data)
-		roof = roofrate(data)
-		discount = round(discountrate(data), 2)
-		rate = findrate(data)
+		dwelling = round(dwellingRate(data), 3)
+		age = homeAge(data)
+		units = unitsRate(data)
+		roof = roofRate(data)
+		discount = round(discountAmount(data), 2)
+		rate = premiumTotal(data)
 
-		return render_template('premium.html', form=form, rate=rate, dwelling=dwelling, age=age, units=units, customerid=customerid, roof=roof, discount=discount)
+		return render_template('premium.html',
+								form=form, 
+								rate=rate,
+								dwelling=dwelling,
+								age=age,
+								units=units,
+								customerid=customerid,
+								roof=roof,
+								discount=discount)
 
-	return render_template('index.html', form=form, customerid=customerid)
+	return render_template('index.html',
+								form=form,
+								customerid=customerid)
 
-def roofrate(data):
-	if data['roof'] == 'asphault':
-		roof = 1.00
-	elif data['roof'] == 'tin':
-		roof = 1.70
-	elif data['roof'] == 'wood':
-		roof = 2.00
+def roofRate(data):
+	r = data['roof']
+	roof = 1.00 if r == 'asphault' else 1.70 if r == 'tin' else 2.00 if r == 'wood'	else None
 	return roof
 
-def homeage(data):
-	if  0 <= data['age'] <= 10:
-		age = 1.00
-	elif 11 <= data['age'] <= 35:
-		age = 1.50
-	elif 36 <= data['age'] <= 100:
-		age = 1.80
-	elif data['age'] > 100:
-		age = 1.95
+def homeAge(data):
+	n = data['age']
+	age = 1.00 if 0 <= n <= 10 else 1.50 if 11 <= n <= 35 else 1.80 if 36 <= n <= 100 else 1.95 if n > 100 else None
 	return age
 
-def unitsrate(data):
-	if data['units'] == '1':
-		units = 1.00
-	elif data['units'] == '2':
-		units = 0.80
-	elif data['units'] == '3':
-		units = 0.80
-	elif data['units'] == '4':
-		units = 0.80
+def unitsRate(data):
+	n = int(data['units'])
+	units = 1.00 if n == 1 else 0.80 if n >= 2 and n <= 4 else None
 	return units
 
-def dwellingrate(data):
+def dwellingRate(data):
+	n = data['coverage']
 	x = [100000, 150000, 200000, 250000, 300000, 350000]
 	y = [0.971, 1.104, 1.314, 1.471, 1.579, 1.761]
-	dwelling = np.interp( data['coverage'], x, y)
+	dwelling = np.interp( n, x, y)
 	return dwelling
 
-def quoterate(data):
-	age = homeage(data)
-	roof = roofrate(data)
-	units = unitsrate(data)
-	dwelling = dwellingrate(data)
-	quote = 350 * dwelling * age * roof * units
-	return quote
+def premiumSubtotal(data):
+	subtotal = 350 * dwellingRate(data) * homeAge(data) * roofRate(data) * unitsRate(data)
+	return subtotal
 
-def discountrate(data):
-	if data['discount'] == 'Y':
-		discount = quoterate(data) * 0.05
-	elif data['discount'] == 'N':
-		discount = 0
+def discountAmount(data):
+	d = data['discount']
+	discount = premiumSubtotal(data) * 0.05 if d == 'Y' else 0
 	return discount
 
-def findrate(data):
-	rate = round(quoterate(data) - discountrate(data), 2)
-	return rate
+def premiumTotal(data):
+	premium = round(premiumSubtotal(data) - discountAmount(data), 2)
+	return premium
 
-@application.route('/premium', methods=['GET'])
-def showrate():
+@application.route('/summary', methods=['GET'])
+def rateSummary():
 	if request.method == 'GET':
 		return render_template('premium.html')
 
 @application.route('/reset', methods=['GET'])
-def resetform():
+def resetForm():
 	global customerid
 	form = RatingRequest()
 	if request.method == 'GET':

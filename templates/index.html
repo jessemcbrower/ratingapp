@@ -13,7 +13,7 @@
 	<p><b>Customer ID: </b>{{ customerid }}</p>
 	<p><b>Dwelling Coverage: </b>{{ form.DwellingCoverage(Placeholder="Coverage Amount") }}</p>
 	{% if form.DwellingCoverage.errors %}
-	<ul class="errors">
+	<ul>
 		{% for error in form.DwellingCoverage.errors %}
 			<li>{{ error }}</li>
 		{% endfor %}
@@ -21,7 +21,7 @@
 {% endif %}
 	<p><b>Age of Home: </b>{{ form.HomeAge(Placeholder="Years") }}</p>
 	{% if form.HomeAge.errors %}
-	<ul class="errors">
+	<ul>
 		{% for error in form.HomeAge.errors %}
 			<li>{{ error }}</li>
 		{% endfor %}
@@ -30,7 +30,7 @@
 	<p><b>Roof Type: </b>{{ form.RoofType }}</p>
 	<p><b>Number of Units: </b>{{ form.NumberOfUnits }}</p>
 	<p><b>Partner Discount? </b>{{ form.PartnerDiscount }}</p>
-	<input type="submit" value="Calculate">
+	{{ form.Calculate }}
 </form>
 {% endblock %}
 </body>
