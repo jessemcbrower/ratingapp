@@ -5,20 +5,17 @@
 </head>
 <body>
 {% block content %}
-
-<h1>Your Estimated Total Premium Is: ${{ rate }}</h1>
-<h3>Details of your rate:</h3>
-<ul>
-	<li><b>Customer ID: </b>{{ customerid }}</li>
-	<li><b>Dwelling Coverage Rate: </b>{{ dwelling }}</li>
-	<li><b>Home Age Rate: </b>{{ age }}</li>
-	<li><b>Roof Type Rate: </b>{{ roof }}</li>
-	<li><b>Number of Units Rate: </b>{{ units }}</li>
-	<li><b>Discount: </b>${{ discount }}</li>
-</ul>
 <form action="/reset" method="GET">
 {{ form.hidden_tag() }}
-	<input type="submit" value="Try Again">
+<h1>Your Estimated Total Premium Is: ${{ rate }}</h1>
+<h3>Details of your rate:</h3>
+<p><b>Customer ID: </b>{{ customerid }}</p>
+<p><b>Dwellng Coverage Rate: </b>{{ dwelling }}</p>
+<p><b>Home Age Rate: </b>{{ age }}</p>
+<p><b>Roof Type Rate: </b>{{ roof }}</p>
+<p><b>Number of Units Rate: </b>{{ units }}</p>
+<p><b>Discount: </b>${{ discount }}</p>
+<input type="submit" value="Try Again">
 </form>
 {% endblock %}
 </body>

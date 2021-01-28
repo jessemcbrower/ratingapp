@@ -14,12 +14,10 @@ except NameError:
 def getinfo():
 
 	global customerid
+	form = RatingRequest()
 
-	if request.method == 'GET':
-		form = RatingRequest()
-		return render_template('index.html', form=form, customerid=customerid)
-	elif request.method == 'POST':
-		form = RatingRequest()
+	if form.validate_on_submit():
+
 		data = {
 
 		'id': customerid,
@@ -38,7 +36,9 @@ def getinfo():
 		discount = round(discountrate(data), 2)
 		rate = findrate(data)
 
-	return render_template('premium.html', form=form, rate=rate, dwelling=dwelling, age=age, units=units, customerid=customerid, roof=roof, discount=discount)
+		return render_template('premium.html', form=form, rate=rate, dwelling=dwelling, age=age, units=units, customerid=customerid, roof=roof, discount=discount)
+
+	return render_template('index.html', form=form, customerid=customerid)
 
 def roofrate(data):
 	if data['roof'] == 'asphault':
