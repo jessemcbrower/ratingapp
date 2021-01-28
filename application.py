@@ -20,6 +20,8 @@ def getinfo():
 	if form.validate_on_submit():
 
 		data = getData()
+		print(data)
+
 		dwelling = round(dwellingRate(data), 3)
 		age = homeAge(data)
 		units = unitsRate(data)
@@ -28,7 +30,8 @@ def getinfo():
 		rate = premiumTotal(data)
 
 		return render_template('premium.html',
-								form=form, 
+								form=form,
+								data=data, 
 								rate=rate,
 								dwelling=dwelling,
 								age=age,

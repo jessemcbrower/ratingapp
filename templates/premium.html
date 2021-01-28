@@ -1,22 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends "base.html" %}
 {% block content %}
 <form action="/reset" method="GET">
 {{ form.hidden_tag() }}
-<h1>Your Estimated Total Premium Is: ${{ rate }}</h1>
-<h3>Details of your rate:</h3>
+<h3>Premium Summary</h3>
 <p><b>Customer ID: </b>{{ customerid }}</p>
-<p><b>Dwellng Coverage Rate: </b>{{ dwelling }}</p>
-<p><b>Home Age Rate: </b>{{ age }}</p>
-<p><b>Roof Type Rate: </b>{{ roof }}</p>
-<p><b>Number of Units Rate: </b>{{ units }}</p>
+
+<p><b>Dwelling Coverage: </b>${{ data['coverage'] }}
+<br>
+<b>Your Rate: </b>{{ dwelling }}</p>
+<p><b>Home Age: </b>{{ data['age'] }}
+<br>
+<b>Your Rate: </b>{{ age }}</p>
+<p><b>Roof Type: </b>{{ data['roof'] }}
+<br>
+<b>Your Rate: </b>{{ roof }}</p>
+<p><b>Number of Units: </b> {{ data['units'] }}
+<br>
+<b>Your Rate: </b>{{ units }}</p>
+<!-- Add conditional statement here; do not show discount if none exist -->
 <p><b>Discount: </b>${{ discount }}</p>
+<h3>Premium Total: ${{ rate }}</h3>
 {{ form.NewQuote }}
 </form>
 {% endblock %}
-</body>
-</html>

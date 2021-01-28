@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends "base.html" %}
 {% block content %}
 
-<h1>Calculate Your Rate</h1>
-<h3>Please enter your information accurately:</h3>
+<h3>Calculate Your Rate</h3>
+<!-- <h5>Please enter your information accurately:</h5> -->
 <form action='/' method='POST'>
 {{ form.hidden_tag() }}
 	<p><b>Customer ID: </b>{{ customerid }}</p>
@@ -33,5 +28,3 @@
 	{{ form.Calculate }}
 </form>
 {% endblock %}
-</body>
-</html>
