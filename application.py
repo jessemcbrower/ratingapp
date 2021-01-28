@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect
 from forms import RatingRequest
 import numpy as np
+import constant
 
 application = Flask(__name__)
 application.config['SECRET_KEY'] = 'dev'
@@ -67,9 +68,7 @@ def unitsRate(data):
 
 def dwellingRate(data):
 	n = data['coverage']
-	x = [100000, 150000, 200000, 250000, 300000, 350000]
-	y = [0.971, 1.104, 1.314, 1.471, 1.579, 1.761]
-	dwelling = np.interp( n, x, y)
+	dwelling = np.interp( n, constant.DWELLING_COVERAGE, constant.RATING_FACTOR)
 	return dwelling
 
 def premiumSubtotal(data):
