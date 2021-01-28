@@ -19,17 +19,7 @@ def getinfo():
 
 	if form.validate_on_submit():
 
-		data = {
-
-		'id': customerid,
-		'coverage': request.form.get('DwellingCoverage'),
-		'age': int(request.form.get('HomeAge')),
-		'roof': request.form.get('RoofType'),
-		'units': request.form.get('NumberOfUnits'),
-		'discount': request.form.get('PartnerDiscount')
-
-		}
-
+		data = getData()
 		dwelling = round(dwellingRate(data), 3)
 		age = homeAge(data)
 		units = unitsRate(data)
@@ -50,6 +40,21 @@ def getinfo():
 	return render_template('index.html',
 								form=form,
 								customerid=customerid)
+
+def getData():
+
+	data = {
+
+		'id': customerid,
+		'coverage': request.form.get('DwellingCoverage'),
+		'age': int(request.form.get('HomeAge')),
+		'roof': request.form.get('RoofType'),
+		'units': request.form.get('NumberOfUnits'),
+		'discount': request.form.get('PartnerDiscount')
+
+		}
+
+	return data
 
 def roofRate(data):
 	r = data['roof']
@@ -83,11 +88,6 @@ def discountAmount(data):
 def premiumTotal(data):
 	premium = round(premiumSubtotal(data) - discountAmount(data), 2)
 	return premium
-
-@application.route('/summary', methods=['GET'])
-def rateSummary():
-	if request.method == 'GET':
-		return render_template('premium.html')
 
 @application.route('/reset', methods=['GET'])
 def resetForm():
