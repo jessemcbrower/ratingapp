@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect
 from forms import RatingRequest
 import numpy as np
-import constant
+import constants
 import json
 
 application = Flask(__name__)
@@ -103,7 +103,7 @@ def get_dwelling_rate(data):
 
 	n = data['coverage']
 
-	dwelling = np.interp(n, constant.DWELLING_COVERAGE, constant.RATING_FACTOR)
+	dwelling = np.interp(n, constants.DWELLING_COVERAGE, constants.RATING_FACTOR)
 
 	return dwelling
 

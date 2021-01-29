@@ -18,7 +18,9 @@
 <br>
 <b>Your Rate: </b>{{ units }}</p>
 <!-- Add conditional statement here; do not show discount if none exist -->
-<p><b>Discount: </b>{{ discount | currencyFormat }}</p>
+{% if discount != 0 %}
+	<p><b>Partner Discount: </b>{{ discount | currencyFormat }}</p>
+{% endif %}
 <h3>Premium Total: {{ rate | currencyFormat }}</h3>
 {{ form.NewQuote }}
 </form>
