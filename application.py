@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect
 from forms import RatingRequest
 import numpy as np
 import constant
+import json
 
 application = Flask(__name__)
 application.config['SECRET_KEY'] = 'dev'
@@ -18,9 +19,9 @@ def get_info():
 
 	if form.validate_on_submit():
 
-		data = get_data()
+		data = json.loads(get_data())
 
-		customerid = data['id']
+		customerid = (data['id'])
 		dwelling = round(get_dwelling_rate(data), 3)
 		age = get_home_age_rate(data)
 		units = get_units_rate(data)
@@ -54,6 +55,8 @@ def get_data():
 		'discount': request.form.get('PartnerDiscount')
 
 		}
+
+	data = json.dumps(data)
 
 	return data
 
