@@ -3,9 +3,9 @@
 <form action="/reset" method="GET">
 {{ form.hidden_tag() }}
 <h3>Premium Summary</h3>
-<p><b>Customer ID: </b>{{ customerid }}</p>
+<p><b>Customer ID: </b>{{ data['id'] }}</p>
 
-<p><b>Dwelling Coverage: </b>${{ data['coverage'] }}
+<p><b>Dwelling Coverage: </b>{{ data['coverage'] | currencyFormat }}
 <br>
 <b>Your Rate: </b>{{ dwelling }}</p>
 <p><b>Home Age: </b>{{ data['age'] }}
@@ -18,8 +18,8 @@
 <br>
 <b>Your Rate: </b>{{ units }}</p>
 <!-- Add conditional statement here; do not show discount if none exist -->
-<p><b>Discount: </b>${{ discount }}</p>
-<h3>Premium Total: ${{ rate }}</h3>
+<p><b>Discount: </b>{{ discount | currencyFormat }}</p>
+<h3>Premium Total: {{ rate | currencyFormat }}</h3>
 {{ form.NewQuote }}
 </form>
 {% endblock %}

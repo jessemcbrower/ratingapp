@@ -2,19 +2,26 @@
 {% block content %}
 
 <h3>Calculate Your Rate</h3>
-<!-- <h5>Please enter your information accurately:</h5> -->
+<div>
 <form action='/' method='POST'>
 {{ form.hidden_tag() }}
-	<p><b>Customer ID: </b>{{ customerid }}</p>
+	<p><b>Customer ID: </b>{{ form.CustomerID(Placeholder="Customer ID") }}</p>
 	<p><b>Dwelling Coverage: </b>{{ form.DwellingCoverage(Placeholder="Coverage Amount") }}</p>
+	<p><b>Age of Home: </b>{{ form.HomeAge(Placeholder="Years") }}</p>
+	<p><b>Roof Type: </b>{{ form.RoofType }}</p>
+	<p><b>Number of Units: </b>{{ form.NumberOfUnits }}</p>
+	<p><b>Partner Discount? </b>{{ form.PartnerDiscount }}</p>
+	{{ form.Calculate }}
+</form>
+</div>
+<div class='error'>
 	{% if form.DwellingCoverage.errors %}
 	<ul>
 		{% for error in form.DwellingCoverage.errors %}
 			<li>{{ error }}</li>
 		{% endfor %}
 	</ul>
-{% endif %}
-	<p><b>Age of Home: </b>{{ form.HomeAge(Placeholder="Years") }}</p>
+	{% endif %}
 	{% if form.HomeAge.errors %}
 	<ul>
 		{% for error in form.HomeAge.errors %}
@@ -22,9 +29,5 @@
 		{% endfor %}
 	</ul>
 	{% endif %}
-	<p><b>Roof Type: </b>{{ form.RoofType }}</p>
-	<p><b>Number of Units: </b>{{ form.NumberOfUnits }}</p>
-	<p><b>Partner Discount? </b>{{ form.PartnerDiscount }}</p>
-	{{ form.Calculate }}
-</form>
+</div>
 {% endblock %}
