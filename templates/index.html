@@ -1,33 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
+	<div>
+	<h3>Calculate Your Rate</h3>
+	<form action='/' method='POST'>
+	{{ form.hidden_tag() }}
+		<p><b>Customer ID: </b>{{ form.CustomerID(Placeholder="Customer ID") }}</p>
+		<p><b>Dwelling Coverage: </b>{{ form.DwellingCoverage(Placeholder="Coverage Amount") }}</p>
+		<p><b>Age of Home: </b>{{ form.HomeAge(Placeholder="Years") }}</p>
+		<p><b>Roof Type: </b>{{ form.RoofType }}</p>
+		<p><b>Number of Units: </b>{{ form.NumberOfUnits }}</p>
+		<p><b>Partner Discount? </b>{{ form.PartnerDiscount }}</p>
+		{{ form.Calculate }}
+	</form>
+	</div>
+	{% if form.DwellingCoverage.errors or form.HomeAge.errors or form.CustomerID.errors %}
+	<div class='errors'>
+	<h3>Error!</h3>
+		{% if form.CustomerID.errors %}
+		<b>Customer ID: </b>
+		<ul>
+			{% for error in form.CustomerID.errors %}
+				<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
 
-<h3>Calculate Your Rate</h3>
-<div>
-<form action='/' method='POST'>
-{{ form.hidden_tag() }}
-	<p><b>Customer ID: </b>{{ form.CustomerID(Placeholder="Customer ID") }}</p>
-	<p><b>Dwelling Coverage: </b>{{ form.DwellingCoverage(Placeholder="Coverage Amount") }}</p>
-	<p><b>Age of Home: </b>{{ form.HomeAge(Placeholder="Years") }}</p>
-	<p><b>Roof Type: </b>{{ form.RoofType }}</p>
-	<p><b>Number of Units: </b>{{ form.NumberOfUnits }}</p>
-	<p><b>Partner Discount? </b>{{ form.PartnerDiscount }}</p>
-	{{ form.Calculate }}
-</form>
-</div>
-<div class='error'>
-	{% if form.DwellingCoverage.errors %}
-	<ul>
-		{% for error in form.DwellingCoverage.errors %}
-			<li>{{ error }}</li>
-		{% endfor %}
-	</ul>
+		{% if form.DwellingCoverage.errors %}
+		<b>Dwelling Coverage: </b>
+		<ul>
+			{% for error in form.DwellingCoverage.errors %}
+				<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+		{% if form.HomeAge.errors %}
+		<b>Age of Home: </b>
+		<ul>
+			{% for error in form.HomeAge.errors %}
+				<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+	</div>
 	{% endif %}
-	{% if form.HomeAge.errors %}
-	<ul>
-		{% for error in form.HomeAge.errors %}
-			<li>{{ error }}</li>
-		{% endfor %}
-	</ul>
-	{% endif %}
-</div>
 {% endblock %}

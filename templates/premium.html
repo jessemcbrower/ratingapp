@@ -4,7 +4,6 @@
 {{ form.hidden_tag() }}
 <h3>Premium Summary</h3>
 <p><b>Customer ID: </b>{{ data['id'] }}</p>
-
 <p><b>Dwelling Coverage: </b>{{ data['coverage'] | currencyFormat }}
 <br>
 <b>Your Rate: </b>{{ dwelling }}</p>
@@ -17,7 +16,6 @@
 <p><b>Number of Units: </b> {{ data['units'] }}
 <br>
 <b>Your Rate: </b>{{ units }}</p>
-<!-- Add conditional statement here; do not show discount if none exist -->
 {% if discount != 0 %}
 	<p><b>Partner Discount: </b>{{ discount | currencyFormat }}</p>
 {% endif %}
