@@ -64,7 +64,7 @@ def get_roof_rate(data):
 
 	r = data['roof']
 
-	if r == 'Asphault Shingles':
+	if r == 'Asphalt Shingles':
 		roof = 1.00
 	elif r == 'Tin':
 		roof = 1.70
