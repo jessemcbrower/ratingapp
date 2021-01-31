@@ -1,0 +1,8 @@
+{
+	"CustomerID" : 2,
+	"DwellingCoverage" : 275000,
+	"HomeAge" : 22,
+	"RoofType" : "Wood",
+	"NumberOfUnits" : 1,
+	"PartnerDiscount" : "Y"
+}

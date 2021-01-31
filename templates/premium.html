@@ -3,23 +3,23 @@
 <form action="/reset" method="GET">
 {{ form.hidden_tag() }}
 <h3>Premium Summary</h3>
-<p><b>Customer ID: </b>{{ data['id'] }}</p>
-<p><b>Dwelling Coverage: </b>{{ data['coverage'] | currencyFormat }}
+<p><b>Customer ID: </b>{{ quote.CustomerID }}</p>
+<p><b>Dwelling Coverage: </b>{{ quote.DwellingCoverage | currencyFormat }}
 <br>
-<b>Your Rate: </b>{{ dwelling }}</p>
-<p><b>Home Age: </b>{{ data['age'] }}
+<b>Your Rate: </b>{{ quote.DwellingRate | numberRounder }}</p>
+<p><b>Home Age: </b>{{ quote.HomeAge }}
 <br>
-<b>Your Rate: </b>{{ age }}</p>
-<p><b>Roof Type: </b>{{ data['roof'] }}
+<b>Your Rate: </b>{{ quote.AgeRate | numberRounder }}</p>
+<p><b>Roof Type: </b>{{ quote.RoofType }}
 <br>
-<b>Your Rate: </b>{{ roof }}</p>
-<p><b>Number of Units: </b> {{ data['units'] }}
+<b>Your Rate: </b>{{ quote.RoofRate }}</p>
+<p><b>Number of Units: </b> {{ quote.NumberOfUnits }}
 <br>
-<b>Your Rate: </b>{{ units }}</p>
-{% if discount != 0 %}
-	<p><b>Partner Discount: </b>{{ discount | currencyFormat }}</p>
+<b>Your Rate: </b>{{ quote.UnitsRate | currencyFormat }}</p>
+{% if quote.Discount != 0 %}
+	<p><b>Partner Discount: </b>{{ quote.Discount | currencyFormat }}</p>
 {% endif %}
-<h3>Premium Total: {{ rate | currencyFormat }}</h3>
+<h3>Premium Total: {{ quote.Premium | currencyFormat }}</h3>
 {{ form.NewQuote }}
 </form>
 {% endblock %}

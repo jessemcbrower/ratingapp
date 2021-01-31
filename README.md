@@ -1,0 +1,1 @@
+curl -H "Content-Type: application/json" --data @projects/ratingApp/samples/sample2.json http://localhost:5000/premium

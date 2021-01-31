@@ -1,0 +1,8 @@
+{
+	"CustomerID" : 1,
+	"DwellingCoverage" : 100000,
+	"HomeAge" : 5,
+	"RoofType" : "Asphalt Shingles",
+	"NumberOfUnits" : 3,
+	"PartnerDiscount" : "Y"
+}
