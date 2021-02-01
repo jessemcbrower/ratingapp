@@ -13,7 +13,7 @@ cURL to the [/premium](http://localhost:5000/premium) endpoint using a sample re
 
 2. Install dependencies
 
-    `pip install -r requirements`
+    `pip install -r requirements.txt`
 
 3. Set path and run app:
 
